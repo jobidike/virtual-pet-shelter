@@ -20,25 +20,26 @@ public class VirtualPetShelterApp {
 		VirtualPet pet3 = new VirtualPet("GiGi", "Giraffe", 60, 60, 60, 60);
 		VirtualPet pet4 = new VirtualPet("Falen", "Flamingo", 40, 40, 40, 40);
 
-		 myShelter.admitPet(pet1);
-		 myShelter.admitPet(pet2);
-		 myShelter.admitPet(pet3);
-		 myShelter.admitPet(pet4);
-
+		myShelter.admitPet(pet1);
+		myShelter.admitPet(pet2);
+		myShelter.admitPet(pet3);
+		myShelter.admitPet(pet4);
 
 		System.out.println("Thank you for working at J's Virtual Pet Shelter!\n");
 		System.out.println("This is the status of your pets: \n");
-	
+
 		for (VirtualPet current : myShelter.petValues()) {
-			//System.out.println(current.getDescription() + " " + current.getName());
+			// System.out.println(current.getDescription() + " " + current.getName());
 			System.out.println(current.toString());
 
 		}
+
 		listOptions();
 
 		while (choice != -1) {
 
 			if (choice == 1) {
+
 				System.out.println("You want to feed all the pets!");
 				System.out.println("Here are the currents stats:\n ");
 
@@ -81,13 +82,3 @@ public class VirtualPetShelterApp {
 
 }
 
-// System.out.println("Name\t" + "Description\t" + "Hunger\t " + "Waste " +
-// "Boredom " + "Thirst");
-// System.out.println("Timothy\t" + "Tiger\t" + "\t50\t" + " 50\t" + "50\t" + "
-// 50");
-// System.out.println("Pepper\t" + "Parrot\t" + "\t30\t" + " 30\t" + "30\t" + "
-// 30");
-// System.out.println("GiGi\t" + "Giraffe\t" + "\t60\t" + " 60\t" + "60\t" + "
-// 60");
-// System.out.println("Falen\t" + "Flamingo\t" + "40\t" + " 40\t" + "40\t" + "
-// 40");
