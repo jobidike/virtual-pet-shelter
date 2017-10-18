@@ -6,66 +6,110 @@ import java.util.Scanner;
 
 public class VirtualPetShelterApp {
 
-	static int choice;
+	
+	static String selection;
+	static String newPetName;
+	static String newPetDescription;
 	static Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) {
 
-		Map<String, String> pets = new HashMap<String, String>();
+		VirtualPetShelter pets = new VirtualPetShelter();
 
-		Shelter myShelter = new Shelter();
+		VirtualPet pet1 = new VirtualPet("Timothy", "the Tiger", 50, 50, 50, 50);
+		VirtualPet pet2 = new VirtualPet("Pepper", "the Parrot", 30, 30, 30, 30);
+		VirtualPet pet3 = new VirtualPet("GiGi", "the Giraffe", 60, 60, 60, 60);
+		VirtualPet pet4 = new VirtualPet("Falen", "the Flamingo", 40, 40, 40, 40);
 
-		VirtualPet pet1 = new VirtualPet("Timothy", "Tiger", 50, 50, 50, 50);
-		VirtualPet pet2 = new VirtualPet("Pepper", "Parrot", 30, 30, 30, 30);
-		VirtualPet pet3 = new VirtualPet("GiGi", "Giraffe", 60, 60, 60, 60);
-		VirtualPet pet4 = new VirtualPet("Falen", "Flamingo", 40, 40, 40, 40);
-
-		myShelter.admitPet(pet1);
-		myShelter.admitPet(pet2);
-		myShelter.admitPet(pet3);
-		myShelter.admitPet(pet4);
+		pets.admitPet(pet1);
+		pets.admitPet(pet2);
+		pets.admitPet(pet3);
+		pets.admitPet(pet4);
 
 		System.out.println("Thank you for working at J's Virtual Pet Shelter!\n");
-		System.out.println("This is the status of your pets: \n");
 
-		for (VirtualPet current : myShelter.petValues()) {
-			// System.out.println(current.getDescription() + " " + current.getName());
-			System.out.println(current.toString());
-
-		}
+		petStats(pets);
 
 		listOptions();
+		int choice = input.nextInt();
 
-		while (choice != -1) {
+
+		do {
 
 			if (choice == 1) {
+				pets.feedAll();
+				System.out.println("Oh, so you want to feed all the pets!\n" + "Thanks for feeding all the pets!");
+				petStats(pets);
+				listOptions();
+				choice = input.nextInt();
 
-				System.out.println("You want to feed all the pets!");
-				System.out.println("Here are the currents stats:\n ");
-
-				for (VirtualPet current : myShelter.petValues()) {
-					System.out.println(current.toString());
-
+			} else if (choice == 2) {
+				pets.waterAll();
+				System.out.println("Oh, so you want to water all the pets!\n" + "Thanks for watering all the pets!");
+				petStats(pets);
+				listOptions();
+				choice = input.nextInt();
+			} else if (choice == 3) {
+				pets.play();
+				System.out.println("Oh great, so you want to play with one of the pets!\n");
+				for (VirtualPet current : pets.allPets()) {
+					System.out.println("(" + current.getName() + ")" + "\t" + current.getDescription() + "\t");
 				}
-				input.nextInt();
+				System.out.println("Please enter the name of the pet you want to play with?");
+				selection = input.nextLine();
+				System.out.println("Great, you can play with" + selection + ".");
+				petStats(pets);
+				listOptions();
+				choice = input.nextInt();
+			} else if (choice == 4) {
+				System.out.println("Yay, you want to adopt a pet!");
+				for (VirtualPet current : pets.allPets()) {
+					System.out.println("(" + current.getName() + ")" + "\t" + current.getDescription());
+				}
+				System.out.println("Please enter the name of the pet you want to adopt?");
+				selection = input.nextLine();
+				pets.adoptPet(selection);
+				System.out.println("You will be a great fit for" + selection + ".");
+				petStats(pets);
+				listOptions();
+				choice = input.nextInt();
+
+			} else if (choice == 5) {
+				System.out.println("So you want to admit a pet, can you tell me the name?");
+				newPetName = input.nextLine();
+				System.out.println("Can you please tell me what kind of pet you have?");
+				newPetDescription = input.nextLine();
+				VirtualPet pet = new VirtualPet(newPetName, newPetDescription);
+				pets.admitPet(pet);
+				for (VirtualPet current : pets.allPets()) {
+					System.out.println("(" + current.getName() + ")" + "\t" + current.getDescription());
+				}
+				System.out.println("Thanks for bringing your pet into the shelter, we will find your pet a safe home.");
+				petStats(pets);
+				listOptions();
+				choice = input.nextInt();
+
+			} else if (choice == 6) {
+				System.out.println("It's always great working with you, see you next week!");
+				break;
+
+			} else {
+				System.out.println("I'm sorry but you played with all the patients.");
+				break;
+
 			}
-			listOptions();
+		} while (choice != 6);
 
+	}
+
+	public static void petStats(VirtualPetShelter shelter) {
+		System.out.println("This is the status of your pets: \n");
+		System.out.println("Name    |Hunger |Thirst |Waste");
+		System.out.println("--------|-------|-------|-------");
+		for (VirtualPet current : shelter.allPets()) {
+			System.out.println(current.getName() + "\t" + current.getHunger() + " \t" + current.getThirst() + " \t"
+					+ current.getWaste());
 		}
-		if (choice == 2) {
-			System.out.println("You watered all the pets!");
-			System.out.println("Here are the current stats:\n ");
-
-			for (VirtualPet current : myShelter.petValues()) {
-				System.out.println(current.toString());
-
-			}
-
-			input.nextLine();
-		}
-
-		listOptions();
-
 	}
 
 	public static void listOptions() {
@@ -76,9 +120,8 @@ public class VirtualPetShelterApp {
 		System.out.println("4 to adopt a pet");
 		System.out.println("5 to admit a pet");
 		System.out.println("6 to quit");
-		choice = input.nextInt();
+		
 
 	}
 
 }
-

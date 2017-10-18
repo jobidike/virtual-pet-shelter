@@ -13,6 +13,10 @@ public class VirtualPet { // model class
 	public VirtualPet(String name, String description) {
 		this.name = name;
 		this.description = description;
+		this.hunger = 12;
+		this.waste = 10;
+		this.boredom = 10;
+		this.thirst = 12;
 	}
 
 	public VirtualPet(String name, String description, int hunger, int waste, int boredom, int thirst) {
@@ -49,10 +53,28 @@ public class VirtualPet { // model class
 		return thirst;
 	}
 
-	@Override
-	public String toString() {
-		return "Name: " + name + "\tDescription: " + description + "\tHunger: " + hunger + "\tWaste: " + waste
-				+ "\tBoredom: " + boredom + "\tThirst: " + thirst;
+	public void water() {
+		hunger += 2;
+		thirst -= 2;
+		waste += 2;
+	}
+
+	public void feed() {
+		hunger -= 3;
+		thirst += 3;
+		waste += 5;
+	}
+
+	public void play() {
+		hunger += 5;
+		thirst += 5;
+		waste += 3;
+	}
+
+	public void tick(int userSelection) {
+		hunger += userSelection;
+		thirst += userSelection;
+		waste += userSelection;
 	}
 
 }
