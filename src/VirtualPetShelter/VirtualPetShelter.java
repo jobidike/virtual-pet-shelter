@@ -13,7 +13,7 @@ public class VirtualPetShelter { // Maintenance Class
 		return pets.values();
 	}
 
-	public VirtualPet getPet(String name) {
+	public VirtualPet getOnePet(String name) {
 		return pets.get(name);
 	}
 
@@ -21,8 +21,8 @@ public class VirtualPetShelter { // Maintenance Class
 		return pets.size();
 	}
 
-	public void admitPet(VirtualPet pet) {
-		pets.put(pet.getName(), pet);
+	public void admitPet(VirtualPet newPet) {
+		pets.put(newPet.getName(), newPet);
 	}
 
 	public VirtualPet adoptPet(String name) {
@@ -30,26 +30,26 @@ public class VirtualPetShelter { // Maintenance Class
 	}
 
 	public void feedAll() {
-		for (VirtualPet pet : allPets()) {
-			pet.feed();
+		for (VirtualPet onePet : allPets()) {
+			onePet.feed();
 		}
 	}
 
 	public void waterAll() {
-		for (VirtualPet pet : allPets()) {
-			pet.water();
+		for (VirtualPet onePet : allPets()) {
+			onePet.water();
 		}
 	}
 
 	public void play() {
-		for (VirtualPet pet : allPets()) {
-			pet.play();
+		for (VirtualPet onePet : allPets()) {
+			onePet.play();
 		}
 	}
 
 	public void tickAll(int userSelection) {
-		for (VirtualPet pet : allPets()) {
-			pet.tick(userSelection);
+		for (VirtualPet onePet : allPets()) {
+			onePet.tick(userSelection);
 		}
 	}
 
