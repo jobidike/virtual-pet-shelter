@@ -1,7 +1,5 @@
 package VirtualPetShelter;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class VirtualPetShelterApp {
@@ -90,23 +88,25 @@ public class VirtualPetShelterApp {
 				listOptions();
 				choice = input.nextInt();
 
-			} else if (choice == 6) {
-				System.out.println("It's always great working with you, see you next week!");
-				input.next();
+				// } else if (choice == 6) {
+				// System.out.println("It's always great working with you, see you next week!");
+				// input.next();
+				// break;
 
-			} else {
-				System.out.println("I'm sorry but you played with all the patients.");
-				input.close();
-				break;
+			} else if (choice > 6 || choice < 1) {
+				System.out.println("I'm sorry but you entered invalid data");
+				listOptions();
+				input.next();
 			}
-		} while (choice != 7);
-		//input.close();
+		} while (choice != 6);
+		// System.out.println("Thanks for playing!");
+
+		System.out.println("Thanks for playing!");
 	}
 
 	public static void petStats(VirtualPetShelter shelter) {
 		System.out.println("This is the status of your pets: \n");
 		System.out.println("Name    |Hunger |Thirst |Waste");
-		System.out.println("--------|-------|-------|-------");
 		for (VirtualPet current : shelter.allPets()) {
 			System.out.println(current.getName() + "\t" + current.getHunger() + " \t" + current.getThirst() + " \t"
 					+ current.getWaste());
